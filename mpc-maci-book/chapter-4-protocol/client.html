@@ -1,0 +1,714 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Client side · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.4">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex-plus/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="server-zk.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../chapter-1-overview/SUMMARY.html">
+            
+                <a href="../chapter-1-overview/SUMMARY.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../chapter-1-overview/problem-statement.html">
+            
+                <a href="../chapter-1-overview/problem-statement.html">
+            
+                    
+                    Problem statement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../chapter-1-overview/design-considerations.html">
+            
+                <a href="../chapter-1-overview/design-considerations.html">
+            
+                    
+                    Design considerations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../chapter-1-overview/protocol-overview.html">
+            
+                <a href="../chapter-1-overview/protocol-overview.html">
+            
+                    
+                    Protocol overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../chapter-2-preliminaries/SUMMARY.html">
+            
+                <a href="../chapter-2-preliminaries/SUMMARY.html">
+            
+                    
+                    Preliminaries
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../chapter-2-preliminaries/MPC/SUMMARY.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/SUMMARY.html">
+            
+                    
+                    MPC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../chapter-2-preliminaries/MPC/linear-sharing.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/linear-sharing.html">
+            
+                    
+                    Linear sharing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="../chapter-2-preliminaries/MPC/beaver-triples.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/beaver-triples.html">
+            
+                    
+                    Beaver triples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="../chapter-2-preliminaries/MPC/common-constructions/intro.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/intro.html">
+            
+                    
+                    Common constructions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.3.1" data-path="../chapter-2-preliminaries/MPC/common-constructions/random-bits.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/random-bits.html">
+            
+                    
+                    Random bits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.2" data-path="../chapter-2-preliminaries/MPC/common-constructions/inversion.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/inversion.html">
+            
+                    
+                    Inversion
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.3" data-path="../chapter-2-preliminaries/MPC/common-constructions/multiplication.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/multiplication.html">
+            
+                    
+                    Round-efficient multiplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.4" data-path="../chapter-2-preliminaries/MPC/common-constructions/or.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/or.html">
+            
+                    
+                    Unbounded fan-in OR
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.5" data-path="../chapter-2-preliminaries/MPC/common-constructions/less-than-bitwise.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/less-than-bitwise.html">
+            
+                    
+                    Bitwise less-than
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.6" data-path="../chapter-2-preliminaries/MPC/common-constructions/random-bitwise.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/random-bitwise.html">
+            
+                    
+                    Random number bitwise sharing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.7" data-path="../chapter-2-preliminaries/MPC/common-constructions/eq-test.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/eq-test.html">
+            
+                    
+                    Equality test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.8" data-path="../chapter-2-preliminaries/MPC/common-constructions/interval-test.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/interval-test.html">
+            
+                    
+                    Interval test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.9" data-path="../chapter-2-preliminaries/MPC/common-constructions/less-than.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/less-than.html">
+            
+                    
+                    Less than
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.10" data-path="../chapter-2-preliminaries/MPC/common-constructions/bit-decomp.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/bit-decomp.html">
+            
+                    
+                    Bit decomposition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.11" data-path="../chapter-2-preliminaries/MPC/common-constructions/sharing.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/sharing.html">
+            
+                    
+                    Sharing over groups
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../chapter-2-preliminaries/collab.html">
+            
+                <a href="../chapter-2-preliminaries/collab.html">
+            
+                    
+                    Collaborative SNARKs
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../chapter-3-subprotocols/SUMMARY.html">
+            
+                <a href="../chapter-3-subprotocols/SUMMARY.html">
+            
+                    
+                    Subprotocols
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../chapter-3-subprotocols/shared-decrypt.html">
+            
+                <a href="../chapter-3-subprotocols/shared-decrypt.html">
+            
+                    
+                    Shared decryption
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../chapter-3-subprotocols/obliv-permute.html">
+            
+                <a href="../chapter-3-subprotocols/obliv-permute.html">
+            
+                    
+                    Oblivious random permutation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../chapter-3-subprotocols/obliv-sort.html">
+            
+                <a href="../chapter-3-subprotocols/obliv-sort.html">
+            
+                    
+                    Oblivious sort by key
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../chapter-3-subprotocols/lookup.html">
+            
+                <a href="../chapter-3-subprotocols/lookup.html">
+            
+                    
+                    Lookup witness generation
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="SUMMARY.html">
+            
+                <a href="SUMMARY.html">
+            
+                    
+                    Main protocol
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="server-mpc.html">
+            
+                <a href="server-mpc.html">
+            
+                    
+                    Server side MPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="server-zk.html">
+            
+                <a href="server-zk.html">
+            
+                    
+                    Witness generation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.3" data-path="client.html">
+            
+                <a href="client.html">
+            
+                    
+                    Client side
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Client side</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="client-side">Client side</h1>
+<h2 id="stub">Stub</h2>
+<p>This describes possible ways of inputting the required information into MPC. There are various tradeoffs available. We will need to choose one at some point, but currently are uncertain on this.</p>
+<p>Client, of course, needs to provide an aforementioned proof of validity of the vote. But this vote also needs to be encrypted in some way. This way, ideally, should be</p>
+<ol>
+<li>MPC-friendly in a sense that it is easy to decrypt.</li>
+<li>Proof-friendly in a sense the <em>witness of decryption is easy to produce in MPC</em>.</li>
+</ol>
+<h3 id="separate-parties-handoff">Separate parties handoff</h3>
+<p>This is the simplest way to implement, and, arguably, it also incurs minimal computation for MPC. It, however, leads to a <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">n</span></span></span></span>-times blowup in both bandwidth and client-side work.</p>
+<p>This works as follows - the user creates their shares client-side, and encrypts them separately with public keys of the parties using some SNARK-friendly way (say, elliptic ElGamal over the JubJub curve + MiMC). They publish the encrypted shares. The MPC side then produces the proof of decryption (which is easy to do because the parts of the witness can be constructed by the individual parties).</p>
+<h3 id="shared-private-key">Shared private key</h3>
+<p>In this case, the client encrypts the vote only once, and MPC does the proof of the decryption. It is less efficient in terms of the MPC work, but can be improved a bit by using different circuit for El Gamal decryption - doing <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">n</span></span></span></span> separate scalar products with shares of the private key. This admits an efficient witness, because the scalar multiplication part of the witness is now held by the parties separately.</p>
+<h3 id="outsourcing-kzg-input">Outsourcing KZG input</h3>
+<p>This version is ideal from the MPC standpoint, but puts a very heavy computational load on the client.</p>
+<p>In this case, the client does 2 transactions for each vote. First one is &quot;register&quot;, which sets an id of the vote, which we will denote as <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.65952em;"></span><span class="strut bottom" style="height:0.65952em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">i</span></span></span></span>, and we will now assume that the <code>vote</code> structure has the length of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span> field elements. Increase it by <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.64444em;vertical-align:0em;"></span><span class="base"><span class="mord">1</span></span></span></span>, by adding the blinding factor <code>vote.advice</code>.</p>
+<p>The second one consists of the encryption of the vote (in some MPC-friendly way), the proof of validity, and the following additional data:</p>
+<ol>
+<li>The KZG commitment <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mo><msup><mo><mo>∑</mo></mo><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></msup><mtext>vote.i</mtext><msub><mi>L</mi><mrow><mi>k</mi><mi>i</mi><mo>+</mo><mi>t</mi></mrow></msub><mo>+</mo><mtext>vote.advice</mtext><mo>∗</mo><mi>T</mi></mo><mrow><mi>t</mi><mo>=</mo><mn>0</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\underset{t=0}{\overset{k-1}\sum \text{vote.i} L_{ki+t} + \text{vote.advice}*T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.5361129999999998em;"></span><span class="strut bottom" style="height:2.5032259999999997em;vertical-align:-0.9671130000000001em;"></span><span class="base"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5361129999999998em;"><span style="top:-2.669em;margin-left:0em;"><span class="pstrut" style="height:3.5361130000000003em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">t</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.5361130000000003em;"><span class="pstrut" style="height:3.5361130000000003em;"></span><span><span class="mop"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.536113em;"><span style="top:-3.0000050000000003em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span></span></span><span style="top:-3.950005em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25000500000000003em;"></span></span></span></span><span class="mord rule" style="margin-right:0.16666666666666666em;"></span><span class="mord text"><span class="mord">vote.i</span></span><span class="mord"><span class="mord mathit">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span><span class="mord mathit mtight">i</span><span class="mbin mtight">+</span><span class="mord mathit mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"></span></span></span></span></span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord text"><span class="mord">vote.advice</span></span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9671130000000001em;"></span></span></span></span></span></span></span>.</li>
+<li>The proof that this KZG commitment corresponds to the decryption of the encrypted vote.</li>
+</ol>
+<p>This, of course, allows to circumvent all of the proving work on the MPC side - it can just add up KZG commitments, creating the input column to the PlonK. The proof on the client side, on the other hand, is extremely heavy because it requires multi-scalar multiplication over non-native field. It remains to be seen whether it is possible to somehow tackle this issue.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="server-zk.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Witness generation">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Client side","level":"1.5.3","depth":2,"previous":{"title":"Witness generation","level":"1.5.2","depth":2,"path":"chapter-4-protocol/server-zk.md","ref":"chapter-4-protocol/server-zk.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["katex-plus"],"pluginsConfig":{"katex-plus":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-4-protocol/client.md","mtime":"2022-12-15T19:52:25.374Z","type":"markdown"},"gitbook":{"version":"4.0.4","time":"2022-12-15T20:03:30.470Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
