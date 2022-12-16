@@ -1,0 +1,724 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Design considerations · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.4">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex-plus/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="protocol-overview.html" />
+    
+    
+    <link rel="prev" href="problem-statement.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="SUMMARY.html">
+            
+                <a href="SUMMARY.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="problem-statement.html">
+            
+                <a href="problem-statement.html">
+            
+                    
+                    Problem statement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="design-considerations.html">
+            
+                <a href="design-considerations.html">
+            
+                    
+                    Design considerations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="protocol-overview.html">
+            
+                <a href="protocol-overview.html">
+            
+                    
+                    Protocol overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../chapter-2-preliminaries/SUMMARY.html">
+            
+                <a href="../chapter-2-preliminaries/SUMMARY.html">
+            
+                    
+                    Preliminaries
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../chapter-2-preliminaries/MPC/SUMMARY.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/SUMMARY.html">
+            
+                    
+                    MPC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../chapter-2-preliminaries/MPC/linear-sharing.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/linear-sharing.html">
+            
+                    
+                    Linear sharing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="../chapter-2-preliminaries/MPC/beaver-triples.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/beaver-triples.html">
+            
+                    
+                    Beaver triples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="../chapter-2-preliminaries/MPC/common-constructions/intro.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/intro.html">
+            
+                    
+                    Common constructions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.3.1" data-path="../chapter-2-preliminaries/MPC/common-constructions/random-bits.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/random-bits.html">
+            
+                    
+                    Random bits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.2" data-path="../chapter-2-preliminaries/MPC/common-constructions/inversion.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/inversion.html">
+            
+                    
+                    Inversion
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.3" data-path="../chapter-2-preliminaries/MPC/common-constructions/multiplication.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/multiplication.html">
+            
+                    
+                    Round-efficient multiplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.4" data-path="../chapter-2-preliminaries/MPC/common-constructions/or.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/or.html">
+            
+                    
+                    Unbounded fan-in OR
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.5" data-path="../chapter-2-preliminaries/MPC/common-constructions/less-than-bitwise.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/less-than-bitwise.html">
+            
+                    
+                    Bitwise less-than
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.6" data-path="../chapter-2-preliminaries/MPC/common-constructions/random-bitwise.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/random-bitwise.html">
+            
+                    
+                    Random number bitwise sharing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.7" data-path="../chapter-2-preliminaries/MPC/common-constructions/eq-test.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/eq-test.html">
+            
+                    
+                    Equality test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.8" data-path="../chapter-2-preliminaries/MPC/common-constructions/interval-test.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/interval-test.html">
+            
+                    
+                    Interval test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.9" data-path="../chapter-2-preliminaries/MPC/common-constructions/less-than.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/less-than.html">
+            
+                    
+                    Less than
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.10" data-path="../chapter-2-preliminaries/MPC/common-constructions/bit-decomp.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/bit-decomp.html">
+            
+                    
+                    Bit decomposition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.11" data-path="../chapter-2-preliminaries/MPC/common-constructions/sharing.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/sharing.html">
+            
+                    
+                    Sharing over groups
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../chapter-2-preliminaries/collab.html">
+            
+                <a href="../chapter-2-preliminaries/collab.html">
+            
+                    
+                    Collaborative SNARKs
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../chapter-3-subprotocols/SUMMARY.html">
+            
+                <a href="../chapter-3-subprotocols/SUMMARY.html">
+            
+                    
+                    Subprotocols
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../chapter-3-subprotocols/shared-decrypt.html">
+            
+                <a href="../chapter-3-subprotocols/shared-decrypt.html">
+            
+                    
+                    Shared decryption
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../chapter-3-subprotocols/obliv-permute.html">
+            
+                <a href="../chapter-3-subprotocols/obliv-permute.html">
+            
+                    
+                    Oblivious random permutation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../chapter-3-subprotocols/obliv-sort.html">
+            
+                <a href="../chapter-3-subprotocols/obliv-sort.html">
+            
+                    
+                    Oblivious sort by key
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../chapter-3-subprotocols/lookup.html">
+            
+                <a href="../chapter-3-subprotocols/lookup.html">
+            
+                    
+                    Lookup witness generation
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../chapter-4-protocol/SUMMARY.html">
+            
+                <a href="../chapter-4-protocol/SUMMARY.html">
+            
+                    
+                    Main protocol
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../chapter-4-protocol/server-mpc.html">
+            
+                <a href="../chapter-4-protocol/server-mpc.html">
+            
+                    
+                    Server side MPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../chapter-4-protocol/server-zk.html">
+            
+                <a href="../chapter-4-protocol/server-zk.html">
+            
+                    
+                    Witness generation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../chapter-4-protocol/client.html">
+            
+                <a href="../chapter-4-protocol/client.html">
+            
+                    
+                    Client side
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Design considerations</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="design-considerations">Design considerations</h1>
+<p>There are few principles we use when translating the system to MPC, and few necessary changes to the standard MACI.</p>
+<ol>
+<li>Moving things that are provable client-side to the client. In standard MACI, the server decrypts all messages, and processes them, checking correctness as a first step. Computations in MPC are much costlier, so we opt to push a lot of work to the client side. Specifically, the encrypted message is accompanied with a Groth16 zk-proof, which validates that the message:<ul>
+<li>Decrypts to a well-formed vote</li>
+<li>The signature is correct</li>
+<li>The vote vector is correct for this user</li>
+<li>Keychange is correct</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>Parallel processing. The main bottleneck in the arithmetic MPC is round-complexity, therefore normal sequential processing of votes 1-by-1 is inefficient. Instead, we use oblivious stable sort by key as a main primitive, and custom permutation arguments for the proof.
+As a funny byproduct, the behavior differs from standard MACI in a subtle way (which doesn&apos;t break coercion-resistance). Namely, it is possible to &quot;time travel&quot; - for example, the sequence of keychanges <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>K</mi><mn>2</mn></msub><mo>→</mo><msub><mi>K</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">K_2 \rightarrow K_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span>, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>K</mi><mn>1</mn></msub><mo>→</mo><msub><mi>K</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">K_1 \rightarrow K_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> ​ correctly changes they key from ​<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>K</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">K_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>K</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">K_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span>. The keychanges from a single key are still ordered by timestamp, and only the first one is valid, so the normal coercion-resistance mechanism works.</p>
+</li>
+<li><p>Keychange non-collision. For our approach, it is very convenient that the graph of all key-changes of an individual user is a forest (disjoint collection of trees). We enforce it in a following way:</p>
+<ul>
+<li>First of all, our keys are not actual keys, and better thought of as &quot;vote identifiers&quot;, any vote contains normal signature of a public key, and the identifier​ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07153em;">K</span></span></span></span>.</li>
+<li>Initial identifier is still set to be ​<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>K</mi><mtext>init</mtext></msub><mo>=</mo><msub><mi>P</mi><mtext>user</mtext></msub></mrow><annotation encoding="application/x-tex">K_{\text{init}}=P_{\text{user}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31750199999999995em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">init</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">user</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span>.</li>
+<li>On a keychange, new key <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>K</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">K&apos;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:0.751892em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>​ must be obtained as <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>K</mi><mo mathvariant="normal">′</mo></msup><mo>=</mo><mtext>Hash</mtext><mo>(</mo><mi>K</mi><mo separator="true">,</mo><mi>R</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">K&apos; = \text{Hash}(K, R)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mord text"><span class="mord">Hash</span></span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="mpunct">,</span><span class="mord rule" style="margin-right:0.16666666666666666em;"></span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mclose">)</span></span></span></span>​, where <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07153em;">K</span></span></span></span>​ is an old key, and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span> is supplied by the user. This is checked in the zk-proof provided by the client, and guarantees the impossibility of reaching the same key from two different keys, provided that we use a collision resistant hash function.</li>
+</ul>
+</li>
+<li><p>For optimisation reasons, we might require the voter to send a pair of transactions: first one registering vote id, and second one with the vote. This is done to enable the following trick: user sends both their part of the PlonK input commitment, and encrypted vote which contains their input, with the proof that these two pieces are in accord. Then, in MPC we do not need to provide decryption witness and can just use the sum of user commitments as an input column.</p>
+</li>
+</ol>
+<p>The extensive discussion on this is <a href="../chapter-4-protocol/client.html">here</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="problem-statement.html" class="navigation navigation-prev " aria-label="Previous page: Problem statement">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="protocol-overview.html" class="navigation navigation-next " aria-label="Next page: Protocol overview">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Design considerations","level":"1.2.2","depth":2,"next":{"title":"Protocol overview","level":"1.2.3","depth":2,"path":"chapter-1-overview/protocol-overview.md","ref":"chapter-1-overview/protocol-overview.md","articles":[]},"previous":{"title":"Problem statement","level":"1.2.1","depth":2,"path":"chapter-1-overview/problem-statement.md","ref":"chapter-1-overview/problem-statement.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["katex-plus"],"pluginsConfig":{"katex-plus":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-1-overview/design-considerations.md","mtime":"2022-12-15T16:23:31.128Z","type":"markdown"},"gitbook":{"version":"4.0.4","time":"2022-12-16T04:41:46.534Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

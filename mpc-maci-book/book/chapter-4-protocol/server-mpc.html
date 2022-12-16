@@ -1,0 +1,784 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Server side MPC · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 4.0.4">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex-plus/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="server-zk.html" />
+    
+    
+    <link rel="prev" href="SUMMARY.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../chapter-1-overview/SUMMARY.html">
+            
+                <a href="../chapter-1-overview/SUMMARY.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../chapter-1-overview/problem-statement.html">
+            
+                <a href="../chapter-1-overview/problem-statement.html">
+            
+                    
+                    Problem statement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../chapter-1-overview/design-considerations.html">
+            
+                <a href="../chapter-1-overview/design-considerations.html">
+            
+                    
+                    Design considerations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../chapter-1-overview/protocol-overview.html">
+            
+                <a href="../chapter-1-overview/protocol-overview.html">
+            
+                    
+                    Protocol overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../chapter-2-preliminaries/SUMMARY.html">
+            
+                <a href="../chapter-2-preliminaries/SUMMARY.html">
+            
+                    
+                    Preliminaries
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../chapter-2-preliminaries/MPC/SUMMARY.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/SUMMARY.html">
+            
+                    
+                    MPC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../chapter-2-preliminaries/MPC/linear-sharing.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/linear-sharing.html">
+            
+                    
+                    Linear sharing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="../chapter-2-preliminaries/MPC/beaver-triples.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/beaver-triples.html">
+            
+                    
+                    Beaver triples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="../chapter-2-preliminaries/MPC/common-constructions/intro.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/intro.html">
+            
+                    
+                    Common constructions
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.3.1" data-path="../chapter-2-preliminaries/MPC/common-constructions/random-bits.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/random-bits.html">
+            
+                    
+                    Random bits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.2" data-path="../chapter-2-preliminaries/MPC/common-constructions/inversion.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/inversion.html">
+            
+                    
+                    Inversion
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.3" data-path="../chapter-2-preliminaries/MPC/common-constructions/multiplication.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/multiplication.html">
+            
+                    
+                    Round-efficient multiplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.4" data-path="../chapter-2-preliminaries/MPC/common-constructions/or.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/or.html">
+            
+                    
+                    Unbounded fan-in OR
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.5" data-path="../chapter-2-preliminaries/MPC/common-constructions/less-than-bitwise.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/less-than-bitwise.html">
+            
+                    
+                    Bitwise less-than
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.6" data-path="../chapter-2-preliminaries/MPC/common-constructions/random-bitwise.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/random-bitwise.html">
+            
+                    
+                    Random number bitwise sharing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.7" data-path="../chapter-2-preliminaries/MPC/common-constructions/eq-test.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/eq-test.html">
+            
+                    
+                    Equality test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.8" data-path="../chapter-2-preliminaries/MPC/common-constructions/interval-test.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/interval-test.html">
+            
+                    
+                    Interval test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.9" data-path="../chapter-2-preliminaries/MPC/common-constructions/less-than.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/less-than.html">
+            
+                    
+                    Less than
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.10" data-path="../chapter-2-preliminaries/MPC/common-constructions/bit-decomp.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/bit-decomp.html">
+            
+                    
+                    Bit decomposition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3.11" data-path="../chapter-2-preliminaries/MPC/common-constructions/sharing.html">
+            
+                <a href="../chapter-2-preliminaries/MPC/common-constructions/sharing.html">
+            
+                    
+                    Sharing over groups
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../chapter-2-preliminaries/collab.html">
+            
+                <a href="../chapter-2-preliminaries/collab.html">
+            
+                    
+                    Collaborative SNARKs
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../chapter-3-subprotocols/SUMMARY.html">
+            
+                <a href="../chapter-3-subprotocols/SUMMARY.html">
+            
+                    
+                    Subprotocols
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../chapter-3-subprotocols/shared-decrypt.html">
+            
+                <a href="../chapter-3-subprotocols/shared-decrypt.html">
+            
+                    
+                    Shared decryption
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../chapter-3-subprotocols/obliv-permute.html">
+            
+                <a href="../chapter-3-subprotocols/obliv-permute.html">
+            
+                    
+                    Oblivious random permutation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../chapter-3-subprotocols/obliv-sort.html">
+            
+                <a href="../chapter-3-subprotocols/obliv-sort.html">
+            
+                    
+                    Oblivious sort by key
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../chapter-3-subprotocols/lookup.html">
+            
+                <a href="../chapter-3-subprotocols/lookup.html">
+            
+                    
+                    Lookup witness generation
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="SUMMARY.html">
+            
+                <a href="SUMMARY.html">
+            
+                    
+                    Main protocol
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.1" data-path="server-mpc.html">
+            
+                <a href="server-mpc.html">
+            
+                    
+                    Server side MPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="server-zk.html">
+            
+                <a href="server-zk.html">
+            
+                    
+                    Witness generation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="client.html">
+            
+                <a href="client.html">
+            
+                    
+                    Client side
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Server side MPC</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="server-side-mpc">Server side MPC</h1>
+<p>Here, we describe the bulk of the procedure. We have separated the witness generation for the zk-proof audit to the separate subsection, because it is logically independent.</p>
+<h2 id="input">Input</h2>
+<p>Server has a fixed public key <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.13889em;">P</span></span></span></span> in some cryptographic group, implemented over <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="double-struck">F</mi><mi>q</mi></msub></mrow><annotation encoding="application/x-tex">\mathbb{F}_q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68889em;"></span><span class="strut bottom" style="height:0.974998em;vertical-align:-0.286108em;"></span><span class="base"><span class="mord"><span class="mord"><span class="mord mathbb">F</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.03588em;">q</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span></span></span></span>. We will assume it is JubJub curve in what follows, but other options are available, depending on the used proof system.</p>
+<p>The corresponding private key <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>p</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[p]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">[</span><span class="mord mathit">p</span><span class="mclose">]</span></span></span></span> is linearly shared.</p>
+<p>On-chain, the sequence of encrypted votes is published; each vote is accompanied with a zk-proof of its validity predicate. The form of encryption is currently discussed, there are few options (encrypting all with El Gamal, using El Gamal for symmetric key and MiMC for the vote encryption, encrypting shares separately, or potentially adding supplementary advice simplifying data transfer to the main circuit) with different tradeoffs w.r.t. MPC work, witness size and client proving work, respectively. This is TBD, we continue this discussion in <a href="client.html">client side</a> subsection.</p>
+<p>The individual (decrypted) vote v consists of the following data:</p>
+<p><code>v.user</code> - an unique id of the sender in the global registry.
+<code>v.from</code> - a 254-bit key (from which this tx attempts to switch)
+<code>v.to</code> - a 254-bit key (to which this tx attempts to switch)
+<code>v.votes[n]</code> - a vote vector
+<code>v.depth</code> - a number in range <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><msup><mn>2</mn><mrow><mn>1</mn><mn>2</mn><mn>8</mn></mrow></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0..2^{128}-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord">0</span><span class="mord">.</span><span class="mord">.</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span><span class="mord mtight">8</span></span></span></span></span></span></span></span></span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span></span></span></span></p>
+<p>The validity predicate (which needs to be proven client side), says that the vote decrypts to the aforementioned data, and, moreover</p>
+<ol>
+<li>Prover controls cryptographic identity of <code>v.user</code>.</li>
+<li><code>v.to == 0 or v.votes[n] == 0</code> (either tx is a key-switch, or a vote).</li>
+<li>(votes, user) pair satisfies the voting rules.</li>
+<li>Depth satisfies range constraints.</li>
+<li>Knowledge of such <code>R</code>, that<code>(v.to == 0) or v.to == Hash(v.depth, v.from, R)</code>.</li>
+<li><code>(v.depth &gt; 0) or (v.from == init_key[v.user])</code>, where init_key is a set of public initial keys of the users.</li>
+</ol>
+<p>The requirement <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>5</mn></mrow><annotation encoding="application/x-tex">5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.64444em;vertical-align:0em;"></span><span class="base"><span class="mord">5</span></span></span></span> is such that no valid keyswitches should lead to the same <code>v.to</code> key from different states (together with large key size to prevent hash collisions).</p>
+<p>The requirement <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>6</mn></mrow><annotation encoding="application/x-tex">6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.64444em;vertical-align:0em;"></span><span class="base"><span class="mord">6</span></span></span></span> constrains the initial key if we are at depth 0.</p>
+<p>We also refer to an order of a vote in a list of all votes as <code>v.timestamp</code>, and also add a field <code>v.invalid = 0</code>.</p>
+<h2 id="shared-decryption-phase">Shared decryption phase</h2>
+<p> We assume that all of the data is properly constrained (via public checking of validity predicate proof). After this phase (which depends on the encryption implementation) we assume that decrypted votes are all linearly shared between parties, and proceed to the main part of the protocol.</p>
+<p>We put them in the shared array <code>vote</code>.</p>
+<h2 id="main-computation">Main computation</h2>
+<p>Our main idea is to only use sorting + local operations for round optimization purposes. During the computation, we will mainly sort the main array <code>vote</code> (and pretend that operations done are in-place to simplify the notation, but we will need some of the computation trace later to construct the witness).</p>
+<p>One should imagine the set of key-switches of a particular user as a set of trees (starting either from an initial key or from depth &gt; 0). We will also require that every key-switch increases the depth by 1. Note, that because of the non-collision property it should not be possible to have the same <code>v.to</code> field with different <code>v.from</code> or <code>v.depth</code>. Therefore, this graph, indeed, will not have cycles.</p>
+<h3 id="0-depth-compression">0. Depth compression</h3>
+<p>In this round, we discard all votes with <code>v.depth &gt; total_vote_count</code>. This is done to aggressively optimize amount of sorting rounds. Such votes had no chance to be valid anyways, and we believe an adversarial player can not reveal any useful information using this. In what follows, total amount of votes after this reduction is <code>m</code>.</p>
+<h3 id="1-key-compression">1. Key compression</h3>
+<p>This round has two purposes: first, we make the key-size smaller to simplify radix sort, and, second, we ensure that there are no coinciding keys from different users. It is done as follows:</p>
+<p>Every vote is duplicated, with an additional field <code>v.ext</code> set to 0 and 1 respectively, we refer to this array as <code>vote2</code>. For an extended vote, denote <code>v.main_key() = v.ext*v.from + (1-v.ext)v.to</code></p>
+<p><code>v in vote2</code> is sorted (in order of priority) by <code>v.user</code> &gt; <code>v.main_key()</code>.</p>
+<p>Introduce an array <code>jump</code> of the same size, set <code>jump[0] = 0</code> and <code>for i from 1 to m-1:</code></p>
+<pre><code>jump[i] = 
+(vote2[i].main_key() != vote2[i-1].main_key()) or (vote2[i].user != vote2[i-1].user)
+</code></pre><p>Calculate the running sum <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>q[i]</mtext><mo>=</mo><msub><mo><msup><mo><mo>∑</mo></mo><mi>i</mi></msup></mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow></msub><mtext>jump[i]</mtext></mrow><annotation encoding="application/x-tex">\text{q[i]} = \underset{j=0}{\overset i \sum}\text{jump[i]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.511669em;"></span><span class="strut bottom" style="height:2.625446em;vertical-align:-1.1137770000000002em;"></span><span class="base"><span class="mord text"><span class="mord">q[i]</span></span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.511669em;"><span style="top:-2.634em;margin-left:0em;"><span class="pstrut" style="height:3.511669em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.5116689999999995em;"><span class="pstrut" style="height:3.511669em;"></span><span><span class="mop"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.511669em;"><span style="top:-3.0000050000000003em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span></span></span><span style="top:-3.950005em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25000500000000003em;"></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.1137770000000002em;"></span></span></span></span><span class="mord rule" style="margin-right:0.16666666666666666em;"></span><span class="mord text"><span class="mord">jump[i]</span></span></span></span></span>. This running sum is constant over the votes that are from the same user and have the coinciding <code>main_key</code>.</p>
+<p>Now, we will set for each <code>i</code>:
+<code>vote2[i].from = vote2[i].ext * q[i] + (1-vote2[i].ext) * vote2[i].from</code>
+<code>vote2[i].to   = (1 - vote2[i].ext) * q[i] + vote2[i].ext * vote2[i].to</code></p>
+<p>which sets the key by which it was sorted to the compressed version.</p>
+<p>Now, we order the <code>vote2</code> back by timestamp (using revealing sort), and then merge the pairs back:</p>
+<ol>
+<li>Reveal the <code>vote2[2*i].ext</code> field; if it is 1, do nothing, if it is 0, swap this element with <code>vote2[2*i+1]</code>.</li>
+<li>Set <code>vote[i].from = vote2[2*i].from; vote[i].to = vote[2*i+1].to</code>.</li>
+</ol>
+<p>This replaces each key with an element of size no more than <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⌈</mo><mi>log</mi><mo>⁡</mo><mo>(</mo><mi>m</mi><mo>)</mo><mo>⌉</mo></mrow><annotation encoding="application/x-tex">\lceil \log(m) \rceil</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">⌈</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord mathit">m</span><span class="mclose">)</span><span class="mclose">⌉</span></span></span></span>, in such a way that:</p>
+<ol>
+<li>Same keys of the same user are mapped in the same compressed versions.</li>
+<li>There are no other collisions; in particular same keys of different users are mapped to different compressed versions // this never happens normally because initial keys are different, but might be a result of a deliberate attack (an attacker could send a &quot;hanging&quot; vote of depth &gt; 0 with arbitrary from key).</li>
+</ol>
+<h3 id="1-initial-sort">1. Initial sort</h3>
+<p>The votes are sorted (in order of priority) by  <code>v.from</code> &gt; <code>v.timestamp</code> (by which they were already sorted, so no additional action is required because sort is stable).</p>
+<p>After this, we set <code>vote.invalid = (vote[k-1].from == vote[k].from)</code> for all <code>k&gt;0</code>.</p>
+<p><em>After this round, all votes that have a particular &quot;from&quot; key after the first attempt of using such &quot;from&quot; key will be invalidated. Note that if the first keyswitch turns out to be invalid later (due to the depth requirement), it will also invalidate further valid keyswitch.</em></p>
+<p>The result of the round will be that the tree valid key-switches is now a set of linear paths (&quot;bamboos&quot;).</p>
+<h3 id="2-the-main-cycle">2. The main cycle</h3>
+<p>Denote <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mo>=</mo><mo>⌈</mo><mi>log</mi><mo>⁡</mo><mo>(</mo><mi>m</mi><mo>)</mo><mo>⌉</mo></mrow><annotation encoding="application/x-tex">d = \lceil \log(m) \rceil</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit">d</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mopen">⌈</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord mathit">m</span><span class="mclose">)</span><span class="mclose">⌉</span></span></span></span>. We will need <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">d</span></span></span></span> rounds of sorting.</p>
+<p>Denote <code>v.odd(r) = v.depth&amp;1&lt;&lt;r</code>
+Denote <code>v.sort_key(r) = v.odd(r) ? v.from : v.to</code></p>
+<h4 id="on-r-th-round">On r-th round:</h4>
+<p>Sort <code>v in vote</code> by (in order of priority) <code>v.invalid</code> &gt; <code>v.sort_key(r)</code>.</p>
+<p>Now, </p>
+<pre><code>for i from 1 to m-1:
+    if vote[i].odd(r):
+        if (vote[i-1].depth + 1&lt;&lt;r == vote[i].depth) &amp; (vote[i-1].to == vote[i].from) :
+            vote[i-1].to = vote[i].to
+            vote[i-1].votes = vote[i].votes
+        vote[i].invalid = 1
+</code></pre><p>This results in all votes of odd depth checking whether their left neighbor has the same <code>to</code> field as they have <code>from</code>,  and whether depth actually increases by <code>1&lt;&lt;r</code>. Then, we basically &quot;merge&quot; them, by setting the left neighbor&apos;s <code>to</code> field and the vote vector to the <code>to</code> field and the vote vector of the composition, and then invalidating the odd vote.</p>
+<p>The votes of odd depth which do not find their left neighbor are invalidated without further actions.</p>
+<p><em>Note: to counter the quirky behavior with &quot;time travel&quot;, mentioned in the introduction, one needs to add to the check the part</em> <code>...&amp; (vote[i-1].timestamp &lt; vote[i].timestamp)</code><em>. This is not hard to do if needed.</em></p>
+<h3 id="3-final-calculation">3. Final calculation</h3>
+<p>At this point, we just need to sum <code>vote[i].votes * (1-vote[i].invalid)</code> over the array to get voting results. In the next part, we will describe the slight modifications needed to produce an auditing zk-proof.</p>
+<h2 id="complexity">Complexity</h2>
+<p>Concrete estimates here are hard, and they probably will depend on the size of the vote vector; one methodology could be estimating total amount of radix sorts that we need to perform (assuming constant register size). Practically, this will be traded off against RAM size of the server machines, but it at least gives an estimate. We will also roughly estimate from above the size of <code>user_id</code> field as <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mo>=</mo><mo>⌈</mo><mi>log</mi><mo>⁡</mo><mo>(</mo><mi>m</mi><mo>)</mo><mo>⌉</mo></mrow><annotation encoding="application/x-tex">d = \lceil \log(m) \rceil</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit">d</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mopen">⌈</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord mathit">m</span><span class="mclose">)</span><span class="mclose">⌉</span></span></span></span>.</p>
+<ol>
+<li>In compression phase, we need to sort an array of size <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>m</mi></mrow><annotation encoding="application/x-tex">2m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.64444em;vertical-align:0em;"></span><span class="base"><span class="mord">2</span><span class="mord mathit">m</span></span></span></span> by a key of total size <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mn>5</mn><mn>4</mn><mo>+</mo><mi>d</mi></mrow><annotation encoding="application/x-tex">254+d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord">2</span><span class="mord">5</span><span class="mord">4</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit">d</span></span></span></span>, and then do one additional revealing sort of size <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>m</mi></mrow><annotation encoding="application/x-tex">2m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.64444em;vertical-align:0em;"></span><span class="base"><span class="mord">2</span><span class="mord mathit">m</span></span></span></span> (which we will promptly ignore in this calculation).</li>
+<li>After the compression phase, the fields <code>from</code> and <code>to</code> also have a size <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">d</span></span></span></span>. Initial sort, thus, is a sort of an array of size <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">m</span></span></span></span> by a key of size <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">d</span></span></span></span>.</li>
+<li>Main phase involves <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">d</span></span></span></span> rounds in which we sort by <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">d+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord mathit">d</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span></span></span></span>-bit sized key (additional bit is for <code>invalid</code> bit flag).</li>
+</ol>
+<p>Denoting by <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.02778em;">r</span></span></span></span> the radix sort register bitsize, we need to do <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mn>2</mn><mn>5</mn><mn>4</mn><mo>+</mo><mi>d</mi><mo>)</mo><mi mathvariant="normal">/</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">(254+d)/r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord">2</span><span class="mord">5</span><span class="mord">4</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit">d</span><span class="mclose">)</span><span class="mord">/</span><span class="mord mathit" style="margin-right:0.02778em;">r</span></span></span></span> radix sorts of size <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>m</mi></mrow><annotation encoding="application/x-tex">2m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.64444em;vertical-align:0em;"></span><span class="base"><span class="mord">2</span><span class="mord mathit">m</span></span></span></span>, and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mo>(</mo><mi>d</mi><mo>+</mo><mn>2</mn><mo>)</mo><mi mathvariant="normal">/</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">d(d+2)/r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit">d</span><span class="mopen">(</span><span class="mord mathit">d</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span><span class="mclose">)</span><span class="mord">/</span><span class="mord mathit" style="margin-right:0.02778em;">r</span></span></span></span> radix sorts of size <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">m</span></span></span></span>.</p>
+<p>Round complexity, thus, is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mn>8</mn><mo>+</mo><mi>n</mi><mo>)</mo><mo>(</mo><mn>2</mn><mn>5</mn><mn>6</mn><mo>+</mo><mn>2</mn><mi>d</mi><mo>)</mo><mi>d</mi><mi mathvariant="normal">/</mi><mi>r</mi><mo>+</mo><mi>d</mi><mo>×</mo><mtext>local_ops</mtext></mrow><annotation encoding="application/x-tex">(8+n)(256+2d)d/r + d \times \text{local\_ops}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1.06em;vertical-align:-0.31em;"></span><span class="base"><span class="mopen">(</span><span class="mord">8</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit">n</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">2</span><span class="mord">5</span><span class="mord">6</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span><span class="mord mathit">d</span><span class="mclose">)</span><span class="mord mathit">d</span><span class="mord">/</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit">d</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord text"><span class="mord">local_ops</span></span></span></span></span>, but agressive optimization for <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.02778em;">r</span></span></span></span> is bounded by the exponential blowup in memory requirement.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="SUMMARY.html" class="navigation navigation-prev " aria-label="Previous page: Main protocol">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="server-zk.html" class="navigation navigation-next " aria-label="Next page: Witness generation">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Server side MPC","level":"1.5.1","depth":2,"next":{"title":"Witness generation","level":"1.5.2","depth":2,"path":"chapter-4-protocol/server-zk.md","ref":"chapter-4-protocol/server-zk.md","articles":[]},"previous":{"title":"Main protocol","level":"1.5","depth":1,"path":"chapter-4-protocol/SUMMARY.md","ref":"chapter-4-protocol/SUMMARY.md","articles":[{"title":"Server side MPC","level":"1.5.1","depth":2,"path":"chapter-4-protocol/server-mpc.md","ref":"chapter-4-protocol/server-mpc.md","articles":[]},{"title":"Witness generation","level":"1.5.2","depth":2,"path":"chapter-4-protocol/server-zk.md","ref":"chapter-4-protocol/server-zk.md","articles":[]},{"title":"Client side","level":"1.5.3","depth":2,"path":"chapter-4-protocol/client.md","ref":"chapter-4-protocol/client.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["katex-plus"],"pluginsConfig":{"katex-plus":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-4-protocol/server-mpc.md","mtime":"2022-12-12T17:14:21.396Z","type":"markdown"},"gitbook":{"version":"4.0.4","time":"2022-12-16T04:41:46.534Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

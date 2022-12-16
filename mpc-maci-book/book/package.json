@@ -1,0 +1,19 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "honkit": "^4.0.4"
+  },
+  "dependencies": {
+    "gitbook-plugin-katex-plus": "^1.1.0",
+    "gitbook-plugin-mathjax": "^2.0.0"
+  }
+}
