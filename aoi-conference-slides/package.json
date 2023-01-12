@@ -1,0 +1,17 @@
+{
+  "name": "slides_aoi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gitbook-plugin-katex-plus": "^1.1.0",
+    "gitbook-plugin-mathjax": "^2.0.0",
+    "npx": "^10.2.2",
+    "honkit": "^4.0.4"
+  },
+  "description": ""
+}
