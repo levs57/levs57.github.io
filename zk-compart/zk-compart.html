@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome file</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="zk-chat-with-identity-compartmentalization">ZK-chat with identity compartmentalization</h1>
+<p>Recently, I’ve stumbled on <a href="https://blog.aayushg.com/posts/nullifier">this</a> blogpost. It is about recent work of Aayush Gupta and Kobi Gurkan on deterministic signatures.<br>
+I’ve thought about similar multi-Schnorr schemes, and the possible features they enable, and here I’d like to present a particular interesting usecase - sybil-resistant compartmentalization.</p>
+<h2 id="problem-setting">Problem setting</h2>
+<p>Imagine a zk-chat (or forum, or social network), in which an account is represented by a keypair.<br>
+We want accounts to be able to create “identities”, possibly multiple ones, we call them “sisters” if they originate from the same account.<br>
+We want to be able to prove that</p>
+<ol>
+<li>identity <code>X</code> (controlled by you) is sister to identity <code>Y</code></li>
+<li>identity <code>X</code> (controlled by you) is NOT sister to identity <code>Y</code></li>
+</ol>
+<p>In the second case it must not require cooperation from controller of <code>Y</code>.<br>
+This potentially would unlock some very interesting opportunities - for example, right now when we use social networks, we either use real names (which gives good sybil resistance but no privacy), or use pseudonymous handles - which provides no sybil resistance excluding some sort of reputation value.<br>
+However, this system would allow to get best of both worlds - the initial accounts can be as sybil resistant as we want them to be, and the identities would be private. However, sybil attacks would be trivially countered (say, by requiring that the previous 100 messages in the particular chat / discussion thread do not originate from the sister identity).<br>
+Reputation could also be partially transferred between identities - for example, new pseudonymous identity would potentially be able to prove that her sisters have some threshold reputation value. This is also a sort of soft sybil-resistance mechanic.</p>
+<h2 id="solution">Solution</h2>
+<p>My approach to this problem is similar to the deterministic signatures described in the linked blog, but I will try to keep exposition independent.<br>
+We assume that account is a keypair <code>(G, pG)</code> on some elliptic curve without pairing. When we want to create an identity, we (somehow) sample the point <code>Z</code> from the system. It is mission critical that this <code>Z</code> is obtained by hash to curve, so no discrete log relations with it are known.<br>
+<em>Here, it is important that Z is constructed in a publically verifiable way, because adersarial choice of Z will break the system. Possible ways would be either sampling it from block hash + tx id, or sampling it from account’s private data + nonce and accompanying with zk-proof of well-formedness.</em><br>
+The identity is constructed as <code>(Z, pZ)</code>.<br>
+Let’s see how we can satisfy the required properties. Given two sister identities, we need to prove that the quadruple <code>(Z, pZ, T, pT)</code> is a Diffie-Hellman quadruple. This can be done using a multi-Schnorr proof.<br>
+Now, what is more interesting, the owner of identity <code>(Z, pZ)</code> can prove that they do not control identity <code>(T, qT)</code> for <code>p != q</code>, without knowing <code>q</code>! This is done simply by correctly constructing <code>(T, pT)</code> and checking <code>pT != qT</code>.<br>
+<em>This is the place where adversarial choice of T would trivially break the system.</em></p>
+<h2 id="post-quantum-version">Post-quantum version</h2>
+<p>If we are not constrained by initial accounts being Ethereum-compatible, the schema can be modified to be post-quantum.<br>
+The identity will be constructed as <code>(z, Hash(z, p))</code>, and accompanied with proof of correctly multiplying by (some) <code>p</code> in the Merkle tree of accounts.<br>
+The rest is very similar.<br>
+It makes sense to use it even with non-post-quantum secure zk-proof component, because then privacy will still be unconditional.</p>
+</div>
+</body>
+
+</html>
