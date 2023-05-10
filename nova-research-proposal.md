@@ -28,6 +28,7 @@ To understand a bit more, let's imagine that we are using plonkish arithmetizati
 
 Therefore, I suggest we mentally and terminologically unbind them once and forever, for the common good.
 
+
 ## Proposed arithmetization for Novaish protocols
 
 I suggest the following arithmetization:
