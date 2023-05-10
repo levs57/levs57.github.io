@@ -36,7 +36,7 @@ I suggest the following arithmetization:
 2. We have some equations on wire variables, of max degree $d$.
 3. We have a special wire $t$ playing a role of constants - i.e. set up to $1$. //*this is analogous to Groth16 R1CS btw*
 
-Now, we perform the process of homogenization for every *non-linear* equation in the set. I.e. if an equation has degree > 1, then every monomial of degree $k<d$ must be multiplied by $t^{d-k}$.
+Now, we perform the process of homogenization for every *non-linear* equation in the set. I.e. if an equation has degree > 1, then every monomial of degree $k < d$ must be multiplied by $t^{d-k}$.
 
 For every equation of degree $d>1$ we also introduce a RHS variable. Collection of all RHS variables is called *an error vector*.
 
