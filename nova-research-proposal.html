@@ -12,9 +12,10 @@
 <p>Hypernova seems to be of a different kind and is probably a competitor to this framework itself - it seems to use its CCS arithmetization in a nontrivial way. I need to understand more of it to make my judgement on this (maybe the sumcheck argument is doable in different arithmetizations too).</p>
 <p>Due to some sort of sad and extremely inconvenient misconception which I'm trying to dispel as hard as I can, the idea that arithmetization (specific form of equations) in (1) is somehow related to arithmetization in (5) became widespread.</p>
 <p>In fact, it does not need to be that way (though, similarity can make the step (5) more efficient).</p>
+<details><summary><strong>Let's give an example</strong></summary>
 <blockquote>
 <p>Imagine that we are using Nova with a cycle of curves (Pallas/Vesta), and we want to use Halo2 IPA snark as the final check. In the end of the IVC process, we obtain a pair of instances, one over Pallas and other over Vesta, and need (in particular) to check that commitment to extended witness (relax.factor + witness + error-term) #{{t_{n+1}, [W_{n+1}], [E_{n+1}]}}# opens to some actual vector #{{t_{n+1}, W_{n+1}, E_{n+1}}}# satisfying our relaxed system of equations.  We want to use plonk. What we need to do is to give the vector #{{(W_{n+1}, E_{n+1})}}# <em>as a column</em> to the PlonK, using <em>the same commitment key as we used for extended witness commitment for the halo2 vector commitment key</em>. This allows to move the data without decommitting it and committing it back; I will refer to this process as &quot;passing a commitment&quot; (and sometimes a more general process is called &quot;fiat inputs&quot;, you can read about it <a href="https://notes.ethereum.org/@dankrad/kzg_commitments_in_proofs">here</a>). Next, we can just <em>emulate</em> the system of equations that W, E must satisfy inside of a PlonK circuit - this, of course, will have some overhead, but what's important is that we do not have to open a commitment. Which is nice.</p>
-</blockquote>
+</blockquote></details>
 <p>To understand a bit more, let's imagine that we are using plonkish arithmetization already, so we are in the Sangria world. Our witness is, then, should, optimally, be mapped not into a single column, but into the collection of the columns! So, we do need some custom argument to cut the witness vector into parts. It is somewhat easy in KZG, and somewhat harder in IPA, my point is - even if our arithmetization <em>was</em> plonkish, it is not exactly clear how to map it into the final check arithmetization.</p>
 <p>Therefore, I suggest we mentally and terminologically unbind them once and forever, for the common good.</p>
 <h2>Proposed arithmetization for Novaish protocols</h2>
@@ -26,17 +27,22 @@
 </ol>
 <p>Now, we perform the process of homogenization for every <em>non-linear</em> equation in the set. I.e. if an equation has degree &gt; 1, then every monomial of degree #{{k &lt; d}}# must be multiplied by #{{t^{d-k}}}#.</p>
 <p>For every equation of degree #{{d&gt;1}}# we also introduce a RHS variable. Collection of all RHS variables is called <em>an error vector</em>.</p>
+<details><summary><strong>Why linear eqs get the special treatment?</strong></summary>
 <blockquote>
 <p>We can keep them exact and not relax them at all.</p>
-</blockquote>
+</blockquote></details>
+<details><summary><strong>Can't we homogenize equations of degree k to k, not maximal d?</strong></summary>
 <blockquote>
 <p>No. I mean, yes, but then you will have different error vectors which need to be treated in a different way. So we probably need to deal with it one way or another.</p>
-</blockquote>
+</blockquote></details>
+<p>Now, this generalizes R1CS, and it also generalizes plonkish. The difference with R1CS is that equations do not have the form (linear)*(linear)=(linear), and difference with plonkish is that we do not need to spam the same equation over the each row, and are free to use them in a completely unstructured fashion.
+</p>
 <p>As you can see, this arithmetization is pretty general, and supports basically anything. Let's talk a bit about cost model.</p>
 <p>I suggest also the following <strong>enhanced</strong> arithmetization: together with the circuit, we get a collection of non-intersecting subsets #{{S_i}}#, to which (in the folding process) we will compute <em>partial witness commitments</em>. These can be used in multi-round challenge protocols like Origami or moon-moon.</p>
+<details><summary><strong>A note for the curious reader.</strong></summary>
 <blockquote>
 <p>We could actually declare every column in Sangria to be a different partial witness. It would trivialize loading it into final PlonK - as we would be free to choose independent commitment key for each subset, and we would promptly choose the same one. However, the cost of moving around a bunch of commitments instead of a single one likely outweight</p>
-</blockquote>
+</blockquote></details>
 <h2>Cost model</h2>
 <p>There are two costs that are important in our exposition: one is of the folding itself, and other is of the final verifier. I believe the first cost largely dominates for the relevant applications (because we need to fold potentially millions of steps), and final verifier only needs to be <em>reasonably small</em>. Therefore, as long as we don't do something completely insane (like making full non-sparse R1CS-like circuit and trying to prove it in PlonK, incurring quadratic amount of suffering in process), it should be fine, and we should focus on the costs of folding. If you find yourself incurring quadratic amount of suffering frequently, I would suggest treating it by changing the final snark.</p>
 <p>Let's check work that Novaish folding requires to do the fold a new step into already existing previous one. I will denote as #{{|w|}}# witness size and #{{|E|}}# the error vector size (i.e. amount of non-linear equations).</p>
@@ -48,10 +54,11 @@
 <p>I.e., for each new step we pay #{{1}}# MSM of size #{{|w|}}# and #{{(d-1)}}# MSMs of size #{{|E|}}#.</p>
 <p>Enhanced arithmetization (almost) does not incur additional costs for the prover, but it incurs additional costs to the verifier, because verifier basically only cares about (3).</p>
 <p>Also, in this model I ignore the cost of actually computing the witness. It might be comparable in case we are using very dense gates (for example, have a quadratic gate of the form #{{\sum q_{ij} w_i w_j}}# with all #{{q_{ij}}}#-s being nontrivial, or something even worse). This is an interesting, yet dubious endeavor, for it has a potential of incurring quadratic amount of suffering in the actual SNARK stage.</p>
+<details><summary><strong>A note for the curious reader.</strong></summary>
 <blockquote>
 <p>Also, this particular example can be easily reduced to R1CS, find out how!  But we can have non-trivial examples of this kind in higher degree (for example, determinant of a matrix can be computed in #{{n<sup>3}}# operations but only in #{{n</sup>4}}# if you are not allowed to divide).</p>
-</blockquote>
-<p>Typically, the cost of computing witness should be negligible to an actual MSM.</p>
+</blockquote></details>
+<p>Typically, the cost of computing witness should be negligible compared to an actual MSM.</p>
 <h2>Cost model - advanced tricks</h2>
 <p>We should also understand, that not MSMs are equal with eachother - for example, MSM with coefficients being only #{{0}}#-s and #{{1}}#-s can be very fast to compute!</p>
 <p>This effect is also felt in common proof systems like Groth16 or PlonK, though it is much smaller because typically we need to also construct factor polynomial #{{H(x)}}#, which has big coefficients even if original polynomials were small-coefficient ones.</p>
@@ -85,13 +92,14 @@
 <p>Technically, in Origami this hash also includes the whole transcript of the previous computation. I think it is not exactly needed (for the lookup that is localized in 1 step and thus can not be harmed by reactively changing the data in the previous steps), and thus will ignore it for now - it can be added if the need arises.</p>
 <p>This construction, of course, can be clearly and cleanly added to the IVC: add an additional challenge input to the IVC circuit (and F step circuit), pass the data from it to the step circuit without changing.</p>
 <p>Outer IVC circuit has an access to #{{[w_0]}}# of the instance being folded in, and can sample a commitment and pass it into the public input of this instance, #{{u.x}}#.</p>
+<details><summary><big><big>Big question / proposal</big></big></summary>
 <p>We would like to actually use lookups <em>in the IVC circuit itself</em>, not only in the step circuit F - this would allow us to eliminate the curve cycle and shrink the final on-chain verifier from current millions of constraints to tens of thousands.</p>
 <p>The question is, can we use the above construction to use lookups <em>in</em> IVC? Intuitively, there is no barrier - as this construction computes the challenge in the outer circuit, and then passes it to the inner one, we probably could create partial structure which is non-trivial on the IVC circuit itself.</p>
 <p>It requires a security proof, I don't have one yet, but here is an intuition:</p>
 <p>Imagine we have a satisfying instance-witness quadruple #{{(U_i, W_i, u_i, w_i)}}#, with #{{u_i.x}}# containing (inside of a hash) the instance #{{U_i}}# (and correct challenges generated from partial committed witnesses).</p>
 <p>Then, because #{{w_i}}# is satisfying, it is a trace of computation of the folding of #{{U_{i-1}}}# and #{{u_{i-1}}}# into #{{U_i}}#, and because challenges are now generated in plaintext by the final verifier, the long arithmetic is not broken in #{{w_i}}#.</p>
 <p>So, it is a correct folding, now (warning: extractors do not actually work like this though we all wish they did, it is only an intuition!!!) if you have folded satisfying witness #{{U_i, W_i}}# you could only produce it by having satisfying witnesses #{{u_{i-1}, w_{i-1}, U_{i-1}, W_{i-1}}}#. It remains to check that #{{u_{i-1}.x}}# actually contains correct challenges, but this is clear, because it is guaranteed by execution trace #{{w_i}}#.</p>
-<p>^ this definitely requires formalization, but my gut feeling says <strong>should work</strong> (though I sometimes wish for unrealistic things)</p>
+<p>^ this definitely requires formalization, but my gut feeling says <strong>should work</strong> (though I sometimes wish for unrealistic things)</p></details>
 <h2>More efficient lookups!</h2>
 <p>As promised, I provide a more efficient lookup argument. It is useful when the amount of lookups is small compared to the table size; though we incur the linear cost in the final check. My lack of proficiency with Caulk / Baloo prevents me from figuring out whether it is possible to improve the final check work too, but even with final prover needing to process linear in table size amount of data it is much better than doing it <em>in every single step</em>.</p>
 <p>So, here we go. I will use fractional version of permutation check, as it is more fit for my purposes. Let's recall how it works:</p>
