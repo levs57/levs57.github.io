@@ -1,0 +1,366 @@
+
+      <html>
+        <head>
+          <title>Nova research proposal</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta charset="UTF-8">
+        </head>
+        <body>
+          <div id='content'>
+      <h1 id="1-arithmetization-overhaul">1. Arithmetization overhaul.</h1>
+<h2 id="preliminaries-angry-rant">Preliminaries (angry rant)</h2>
+<p>Before we go into actual proposals, we need to discuss some common misconceptions (stemming largely from the fact that Nova was proposed initially in R1CS arithmetization and Sangria was an attempt to replace it with PlonK).</p>
+<p>I will refer to "Novaish" protocols, by which I actually mean a vague blob of protocols that operate in a following way:</p>
+<ol>
+<li>We have a system of equations ("constraints") on a witness vector.</li>
+<li>We make it homogeneous of degree $d$, where $d$ is a maximal possible degree occuring in the system; sparing only linear equations which we keep linear (remember copy constraints in Sangria?)</li>
+<li>We use folding argument from Nova / Sangria, producing $d-1$ cross term, and obtain a folding scheme.</li>
+<li>(Optional) we construct an IVC.</li>
+<li>(Optional) we have a final SNARK to check the folded instance in one go without need to open.</li>
+</ol>
+<p>Hypernova seems to be of a different kind and is probably a competitor to this framework itself - it seems to use its CCS arithmetization in a nontrivial way. I need to understand more of it to make my judgement on this (maybe the sumcheck argument is doable in different arithmetizations too).</p>
+<p>Due to some sort of sad and extremely inconvenient misconception which I'm trying to dispel as hard as I can, the idea that arithmetization (specific form of equations) in (1) is somehow related to arithmetization in (5) became widespread.</p>
+<p>In fact, it does not need to be that way (though, similarity can make the step (5) more efficient).</p>
+<p><details><summary><b>Let's give an example.</b></summary></p>
+<blockquote>
+  <p>Imagine that we are using Nova with a cycle of curves (Pallas/Vesta), and we want to use Halo2 IPA snark as the final check. In the end of the IVC process, we obtain a pair of instances, one over Pallas and other over Vesta, and need (in particular) to check that commitment to extended witness (relax.factor + witness + error-term) $t<em>{n+1}, [W</em>{n+1}], [E<em>{n+1}]$ opens to some actual vector $t</em>{n+1}, W<em>{n+1}, E</em>{n+1}$ satisfying our relaxed system of equations. <br><br> We want to use plonk. What we need to do is to give the vector $(W<em>{n+1}, E</em>{n+1})$ <em>as a column</em> to the PlonK, using <em>the same commitment key as we used for extended witness commitment for the halo2 vector commitment key</em>. This allows to move the data without decommitting it and committing it back; I will refer to this process as "passing a commitment" (and sometimes a more general process is called "fiat inputs", you can read about it <a href="https://notes.ethereum.org/@dankrad/kzg_commitments_in_proofs">here</a>).<br><br> Next, we can just <em>emulate</em> the system of equations that W, E must satisfy inside of a PlonK circuit - this, of course, will have some overhead, but what's important is that we do not have to open a commitment. Which is nice.</p>
+</blockquote>
+<p></details></p>
+<p>To understand a bit more, let's imagine that we are using plonkish arithmetization already, so we are in the Sangria world. Our witness is, then, should, optimally, be mapped not into a single column, but into the collection of the columns! So, we do need some custom argument to cut the witness vector into parts. It is somewhat easy in KZG, and somewhat harder in IPA, my point is - even if our arithmetization <em>was</em> plonkish, it is not exactly clear how to map it into the final check arithmetization.</p>
+<p>Therefore, I suggest we mentally and terminologically unbind them once and forever, for the common good.</p>
+<h2 id="proposed-arithmetization-for-novaish-protocols">Proposed arithmetization for Novaish protocols</h2>
+<p>I suggest the following arithmetization:</p>
+<ol>
+<li>We have a set of wires.</li>
+<li>We have some equations on wire variables, of max degree $d$.</li>
+<li>We have a special wire $t$ playing a role of constants - i.e. set up to $1$. //<em>this is analogous to Groth16 R1CS btw</em></li>
+</ol>
+<p>Now, we perform the process of homogenization for every <em>non-linear</em> equation in the set. I.e. if an equation has degree &gt; 1, then every monomial of degree $k &lt; d$ must be multiplied by $t^{d-k}$.</p>
+<p>For every equation of degree $d&gt;1$ we also introduce a RHS variable. Collection of all RHS variables is called <em>an error vector</em>.</p>
+<p><details><summary><b>Why linear eqs get the special treatment?</b></summary> </p>
+<blockquote>
+  <p>We can keep them exact and not relax them at all.</details></p>
+</blockquote>
+<p><details><summary><b>Can't we homogenize equations of degree k to k, not maximal d?</b></summary> </p>
+<blockquote>
+  <p>No. I mean, yes, but then you will have different error vectors which need to be treated in a different way. So we probably need to deal with it one way or another.</details><br />
+  <br><br />
+  Now, this generalizes R1CS, and it also generalizes plonkish. The difference with R1CS is that equations do not have the form (linear)*(linear)=(linear), and difference with plonkish is that we do not need to spam the same equation over the each row, and are free to use them in a completely unstructured fashion.</p>
+</blockquote>
+<p>As you can see, this arithmetization is pretty general, and supports basically anything. Let's talk a bit about cost model.</p>
+<p>I suggest also the following <strong>enhanced</strong> arithmetization: together with the circuit, we get a collection of non-intersecting subsets $S_i$, to which (in the folding process) we will compute <em>partial witness commitments</em>. These can be used in multi-round challenge protocols like Origami or moon-moon.</p>
+<p><details><summary><b>A note for the curious reader.</b></summary> </p>
+<blockquote>
+  <p>We could actually declare every column in Sangria to be a different partial witness. It would trivialize loading it into final PlonK - as we would be free to choose independent commitment key for each subset, and we would promptly choose the same one. However, the cost of moving around a bunch of commitments instead of a single one likely outweight<br />
+  </details></p>
+</blockquote>
+<h2 id="cost-model">Cost model</h2>
+<p>There are two costs that are important in our exposition: one is of the folding itself, and other is of the final verifier. I believe the first cost largely dominates for the relevant applications (because we need to fold potentially millions of steps), and final verifier only needs to be <em>reasonably small</em>. Therefore, as long as we don't do something completely insane (like making full non-sparse R1CS-like circuit and trying to prove it in PlonK, incurring quadratic amount of suffering in process), it should be fine, and we should focus on the costs of folding. If you find yourself incurring quadratic amount of suffering frequently, I would suggest treating it by changing the final snark.</p>
+<p>Let's check work that Novaish folding requires to do the fold a new step into already existing previous one. I will denote as $|w|$ witness size and $|E|$ the error vector size (i.e. amount of non-linear equations).</p>
+<ol>
+<li>Compute witness commitment to a new step: $|w|$-sized MSM.</li>
+<li>Compute cross-term commitment: $(d-1)$ MSMs of size $|E|$.</li>
+<li>Do other stuff (negligible in comparison): i.e. hash some stuff, multiply few points by few constants and add them up.</li>
+</ol>
+<p>I.e., for each new step we pay $1$ MSM of size $|w|$ and $(d-1)$ MSMs of size $|E|$.</p>
+<p>Enhanced arithmetization (almost) does not incur additional costs for the prover, but it incurs additional costs to the verifier, because verifier basically only cares about (3).</p>
+<p>Also, in this model I ignore the cost of actually computing the witness. It might be comparable in case we are using very dense gates (for example, have a quadratic gate of the form $\sum q<em>{ij} w</em>i w<em>j$ with all $q</em>{ij}$-s being nontrivial, or something even worse). This is an interesting, yet dubious endeavor, for it has a potential of incurring quadratic amount of suffering in the actual SNARK stage.</p>
+<p><details><summary><b>A note for the curious reader.</b></summary> </p>
+<blockquote>
+  <p>Also, this particular example can be easily reduced to R1CS, find out how! <br><br> But we can have non-trivial examples of this kind in higher degree (for example, determinant of a matrix can be computed in $n^3$ operations but only in $n^4$ if you are not allowed to divide).<br />
+  </details></p>
+</blockquote>
+<p>Typically, the cost of computing witness should be negligible to an actual MSM.</p>
+<h2 id="cost-model---advanced-tricks">Cost model - advanced tricks</h2>
+<p>We should also understand, that not MSMs are equal with eachother - for example, MSM with coefficients being only $0$-s and $1$-s can be very fast to compute!</p>
+<p>This effect is also felt in common proof systems like Groth16 or PlonK, though it is much smaller because typically we need to also construct factor polynomial $H(x)$, which has big coefficients even if original polynomials were small-coefficient ones.</p>
+<p>Similar to this, we can skip a bit of work, but not all of it, in Novaish: namely, computing the witness commitment is much simpler. Computing cross-terms, on the other hand, is not simpler, and they, of course, tend to blow up quite fast.</p>
+<h3 id="supernova">Supernova</h3>
+<p>But there are also specific cases where <em>a large subset of witness is actually 0</em>. Namely, imagine we are struggling with the same problem as Supernova - we have a circuit which is split into few parts, and only want to activate some particular parts of the circuit.</p>
+<p>It can be done almost without overhead, using the following trick: create a selector variable $\lambda_i$, and use it instead of $t$ in the gates belonging to the $i$-th branch of computation.</p>
+<p>Now, there will be an additional circuitry which picks which selector is $1$ (and all others are $0$), and we then can safely nullify the unneeded part of the computation.</p>
+<p>Curious reader, of course, once again will ask about cross-terms: what if we are folding instances with different parts of the circuit activated? The answer is, in this case cross-terms can also be computed quite easily - in fact, they will all be exactly zero for the nullified part of the witness.</p>
+<p>In fact, what I'm describing above is the Supernova construction, packed inside of a single Nova instance and feeling good about it.</p>
+<h3 id="better-lookups">Better lookups</h3>
+<p>There is also a potential to make a new lookup argument, which is (sort of) independent of the size of the table being looked up. It will still likely be prover-linear in the final check unless we come up with some more tricks. I will describe it in a next part, when we take a look on Origami and moon-moon and possible directions of research there.</p>
+<h2 id="work-done-in-this-direction">Work done in this direction</h2>
+<p>I have started a complete rewrite of Nova to remove the dependency on bellperson and R1CS, but because I'm a terrible programmer it is not going that well. Any help in this direction will be appreciated.</p>
+<h1 id="2-lookups">2. Lookups</h1>
+<p>Let's review what we have now. In order to do lookups, we need a challenge oracle, and to have it, we have created partial witnesses. There are many things that we want to do with partial witnesses - for example, we can use them to load some step-dependent data in our circuit (using moon-moon's running hash), or generate challenges - either in moon-moon fashion, or step-by-step (which is Origami, though authors did not frame it in this way).</p>
+<p>To understand the next part, let's do a small recollection of required tooling.</p>
+<h2 id="loading-step-independent-table-in-a-circuit-is-free">Loading <em>step-independent</em> table in a circuit is free</h2>
+<p>Yes, it doesn't even require a partial witness! All we need to do is to check that the table in the final instance is $\text{TABLE}<em>{n} = t</em>n * \text{TABLE}$, where $t_n$ is our final relaxation coefficient.</p>
+<p>Indeed, constant data is just multiplied by $t$ during the folding. Nice.</p>
+<h2 id="partial-witnesses">Partial witnesses</h2>
+<p>Once again, what I'm describing is my understanding of the construction. It is not spelled out in the original text, but there are hardly any other ways to proceed.</p>
+<p>Recall: the relaxed committed instance is a tuple $([w], [E], t, x)$. Triple $(w, E, t)$ will sometimes be called "extended witness", and $x$ is a public input. We modify this data, by keeping multiple $[w<em>i]$-s called partial witnesses (we could also have partial error vectors but I don't have any use for this currently). The definition of folding does not change, except now we need to fold all $[w</em>i]$'s (and of course they all participate in Fiat-Shamir for the random folding coefficient).</p>
+<p>All other things remain in place.</p>
+<p><details><summary>🤔</summary> Maybe this ^ construction is what should be called moon-moon? It feels like a very diverse bag of tricks at this point, with partial witness at its crux. </details></p>
+<h2 id="origami---a-look-on-ivc">Origami - a look on IVC</h2>
+<p>Anyways, Origami basically works like this: we have two subsets, "before the challenge" and "after the challenge". We have public inputs which are actually challenges, I will denote them $c$, but in actual construction $c[0] = \beta$, $c[1] = \gamma$.</p>
+<p>The witnesses to the "before" and "after" subsets are called $w<em>0$ and $w</em>1$, and actual witness is the sum of these too.</p>
+<p>We add an additional constraint that $c \overset{\text{hash}}{\longleftarrow} [w_0]$.</p>
+<p>Technically, in Origami this hash also includes the whole transcript of the previous computation. I think it is not exactly needed (for the lookup that is localized in 1 step and thus can not be harmed by reactively changing the data in the previous steps), and thus will ignore it for now - it can be added if the need arises.</p>
+<p>This construction, of course, can be clearly and cleanly added to the IVC: add an additional challenge input to the IVC circuit (and F step circuit), pass the data from it to the step circuit without changing.</p>
+<p>Outer IVC circuit has an access to $[w_0]$ of the instance being folded in, and can sample a commitment and pass it into the public input of this instance, $u.x$.</p>
+<p><details><summary><big><big>Big question / proposal</big></big></summary></p>
+<p>We would like to actually use lookups <em>in the IVC circuit itself</em>, not only in the step circuit F - this would allow us to eliminate the curve cycle and shrink the final on-chain verifier from current millions of constraints to tens of thousands.</p>
+<p>The question is, can we use the above construction to use lookups <em>in</em> IVC? Intuitively, there is no barrier - as this construction computes the challenge in the outer circuit, and then passes it to the inner one, we probably could create partial structure which is non-trivial on the IVC circuit itself.</p>
+<p>It requires a security proof, I don't have one yet, but here is an intuition:</p>
+<p>Imagine we have a satisfying instance-witness quadruple $(U<em>i, W</em>i, u<em>i, w</em>i)$, with $u<em>i.x$ containing (inside of a hash) the instance $U</em>i$ (and correct challenges generated from partial committed witnesses).</p>
+<p>Then, because $w<em>i$ is satisfying, it is a trace of computation of the folding of $U</em>{i-1}$ and $u<em>{i-1}$ into $U</em>i$, and because challenges are now generated in plaintext by the final verifier, the long arithmetic is not broken in $w_i$.</p>
+<p>So, it is a correct folding, now (warning: extractors do not actually work like this though we all wish they did, it is only an intuition!!!) if you have folded satisfying witness $U<em>i, W</em>i$ you could only produce it by having satisfying witnesses $u<em>{i-1}, w</em>{i-1}, U<em>{i-1}, W</em>{i-1}$. It remains to check that $u<em>{i-1}.x$ actually contains correct challenges, but this is clear, because it is guaranteed by execution trace $w</em>i$.</p>
+<p>^ this definitely requires formalization, but my gut feeling says <strong>should work</strong> (though I sometimes wish for unrealistic things)</p>
+<p></details></p>
+<p>## More efficient lookups!</p>
+<p>As promised, I provide a more efficient lookup argument. It is useful when the amount of lookups is small compared to the table size; though we incur the linear cost in the final check. My lack of proficiency with Caulk / Baloo prevents me from figuring out whether it is possible to improve the final check work too, but even with final prover needing to process linear in table size amount of data it is much better than doing it <em>in every single step</em>.</p>
+<p>So, here we go. I will use fractional version of permutation check, as it is more fit for my purposes. Let's recall how it works:</p>
+<ol>
+<li>For each variable that is being looked up, log a value $a_i$, where $i$ ranges from $1$ to $k$, where $k$ is the amount of lookups.</li>
+<li>Compute how many times each table entry $s<em>i$ has occured in a table $S$. Call this multiplicity $q</em>i$. Note: this $q_i$ sequence has linear size ($n$), but provided we didn't do a lot of lookups, most of the entries are actually zero.</li>
+<li>Generate challenge $\gamma$.</li>
+<li>Check that $\underset{i=1}{\overset{k}{\sum}} \frac{1}{\gamma - a<em>i} = \underset{i=1}{\overset{n}{\sum}} \frac{q</em>i}{\gamma - s_i}$.</li>
+</ol>
+<p>I suggest that we abuse the fact that zero coefficients do not actually occure in the MSM. Let's denote the variables $p<em>i = \frac{q</em>i}{\gamma - s_i}$.</p>
+<p>They are constrained by a following homogeneous quadratic equation: $p<em>i * (\gamma - s</em>i) = t * q<em>i$. Note, that if $p</em>i$ and $q_i$ are $0$ for the both instances being folded, then the cross-term for this equation is also, necessarily, zero.</p>
+<p>Therefore, we can safely ignore all the terms in the sum for which there was no lookup - they do not do anything nor in MSM for the witness, nor they impact cross-terms.</p>
+<p>The table itself also doesn't require any work except of precomputing its commitment $[(s<em>1, …, s</em>n)]$ (so we need to do a linear amount of work once in the setup phase).</p>
+<p>Sadly, we do not currently have a final snark having the same desirable property of ignoring $0$ coefficients (not sure about Hyperplonk, not aware enough to judge).</p>
+<h1 id="shifting-blocks-of-data-in-memory-kzg-in-full-force">Shifting blocks of data in memory: KZG in full force.</h1>
+<p>As you may have noticed, I am particularly fond of moving some array of data from one circuit to the other, without decommitting it and committing it back. There is, however, a particular restriction: the CRS for the piece of data you are trying to copy should be the same in both places. You can circumvent it - at a cost of the opening argument, so for KZG it is fine, and for IPA it is sad. In what follows, I will focus on KZG.</p>
+<p>As a warmup, lets consider a following situation: our circuit is in plonkish, and we really want to use (ultra)plonk as a final verifier. However, we do not want to carry commitments to the separate columns along our whole folding process. The solution is simple - let's use the following CRS:</p>
+<p>$[L<em>0(x)], [L</em>k(x)], [L_{2k}(x)], …$ for the first column</p>
+<p>$[L<em>1(x)], [L</em>{k+1}(x)], L_{2k+1}(x), …$ for the second column</p>
+<p>et cetera. Here, $L_i$ is a Lagrangian basis, as used in PlonK.</p>
+<p>Now, in the end, separate our commitment into pieces corresponding to the columns, lets call them $[w] = [w<em>0] + [w</em>1] + … [w<em>{k-1}]$ (and I hope it does not get confused with partial witnesses, as these only exist on the final step). Now, do a multipoint KZG-open, to check that $w</em>i(\mu^k x) = \tilde{w<em>{i}}(x)$, where $[\tilde{w</em>i}]$ is the actual polynomial commitment we are putting into $i$-th column, and PlonK of course will be used for the subgroup generated by $\mu^k$.</p>
+<p>This is very useful by itself.</p>
+<p>I'd like to recall my <em>final compression check</em> suggestion: when we have an IVC, we use <em>non-IVC Nova itself</em> as a final compression SNARK. Recall that moon-moon can emulate any unstructured circuit at ~3x (!needs clarification!) cost, overhead coming from necessity to load the permutation and to generate the challenge.</p>
+<p><strong>Question</strong>: is it true that if the original circuit has a lot of zeroes, this new circuit can be produced in a way that it also has a lot of zeroes? I.e. can we make "sparse-friendly" copy constraint argument?</p>
+<p>Assume for a moment, that the answer to the following question is yes. Then, only one obstacle is still on the road - KZG Open is not sparse friendly - because if we have a vector with a lot of zeroes, the quotient polynomial is still not sparse.</p>
+<p>However, shift can be made sparse friendly - instead of the Lagrangian shift, we can just use commitment basis $X<em>1, …, X</em>n, \psi X<em>1, …, \psi X</em>n, \psi^2 X<em>1, …, \psi^2 X</em>n, …$ (for some different toxic waste element $\psi$). Then, shifting by $\psi$ can be checked as pairing equation of the form $\langle A, \psi G \rangle = \langle B, G \rangle$, which is, in fact, sparse-friendly.</p>
+<p>So, there is even an avenue to use really big lookups at a relatively small cost (though verifier necessarily becomes logarithmic in size, which is, probably, not desirable).</p>
+
+          </div>
+          <style type='text/css'>body {
+    font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #111;
+    background-color: #fbfbfb;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-feature-settings: "kern" 1;
+    -moz-font-feature-settings: "kern" 1;
+    -o-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+    padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        padding: 5px;
+    }
+    body>#content {
+        padding: 0px 20px 20px 20px !important;
+    }
+}
+
+body>#content {
+    margin: 0px;
+    max-width: 900px;
+    border: 1px solid #e1e4e8;
+    padding: 10px 40px;
+    padding-bottom: 20px;
+    border-radius: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+summary {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+hr {
+    color: #bbb;
+    background-color: #bbb;
+    height: 1px;
+    flex: 0 1 auto;
+    margin: 1em 0;
+    padding: 0;
+    border: none;
+}
+
+.hljs-operator {
+    color: #868686;
+    /* There is a bug where the syntax highlighter would pick no color for e.g. `&&` symbols in the code samples. Let's overwrite this */
+}
+
+
+/**
+ * Links
+ */
+
+a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #0366d6;
+}
+
+a:hover {
+    color: #0366d6;
+    text-decoration: underline;
+}
+
+pre {
+    background-color: #f6f8fa;
+    border-radius: 3px;
+    font-size: 85%;
+    line-height: 1.45;
+    overflow: auto;
+    padding: 16px;
+}
+
+
+/**
+  * Code blocks
+  */
+
+code {
+    background-color: rgba(27, 31, 35, .05);
+    border-radius: 3px;
+    font-size: 85%;
+    margin: 0;
+    word-wrap: break-word;
+    padding: .2em .4em;
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+}
+
+pre>code {
+    background-color: transparent;
+    border: 0;
+    display: inline;
+    line-height: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    word-wrap: normal;
+    font-size: 100%;
+}
+
+
+/**
+ * Blockquotes
+ */
+
+blockquote {
+    margin-left: 30px;
+    margin-top: 0px;
+    margin-bottom: 16px;
+    border-left-width: 3px;
+    padding: 0 1em;
+    color: #828282;
+    border-left: 4px solid #e8e8e8;
+    padding-left: 15px;
+    font-size: 18px;
+    letter-spacing: -1px;
+    font-style: italic;
+}
+
+blockquote * {
+    font-style: normal !important;
+    letter-spacing: 0;
+    color: #6a737d !important;
+}
+
+
+/**
+ * Tables
+ */
+
+table {
+    border-spacing: 2px;
+    display: block;
+    font-size: 14px;
+    overflow: auto;
+    width: 100%;
+    margin-bottom: 16px;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+th {
+    font-weight: 600;
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+
+
+/**
+ * Others
+ */
+
+img {
+    max-width: 100%;
+}
+
+p {
+    line-height: 24px;
+    font-weight: 400;
+    font-size: 16px;
+    color: #24292e;
+}
+
+ul {
+    margin-top: 0;
+}
+
+li {
+    color: #24292e;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+li+li {
+    margin-top: 0.25em;
+}
+
+* {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: #24292e;
+}
+
+a:visited {
+    color: #0366d6;
+}
+
+h1,
+h2,
+h3 {
+    border-bottom: 1px solid #eaecef;
+    color: #111;
+    /* Darker */
+}
+
+code>* {
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
+}</style>
+          <style type='text/css'>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{color:#abb2bf;background:#282c34}.hljs-comment,.hljs-quote{color:#5c6370;font-style:italic}.hljs-doctag,.hljs-formula,.hljs-keyword{color:#c678dd}.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#e06c75}.hljs-literal{color:#56b6c2}.hljs-addition,.hljs-attribute,.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#98c379}.hljs-attr,.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#d19a66}.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol,.hljs-title{color:#61aeee}.hljs-built_in,.hljs-class .hljs-title,.hljs-title.class_{color:#e6c07b}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}.hljs-link{text-decoration:underline}</style>
+        </body>
+      </html>
