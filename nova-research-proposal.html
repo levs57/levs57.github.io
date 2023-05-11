@@ -76,6 +76,8 @@
 <p>Once again, what I'm describing is my understanding of the construction. It is not spelled out in the original text, but there are hardly any other ways to proceed.</p>
 <p>Recall: the relaxed committed instance is a tuple #{{([w], [E], t, x)}}#. Triple #{{(w, E, t)}}# will sometimes be called &quot;extended witness&quot;, and #{{x}}# is a public input. We modify this data, by keeping multiple #{{[w_i]}}#-s called partial witnesses (we could also have partial error vectors but I don't have any use for this currently). The definition of folding does not change, except now we need to fold all #{{[w_i]}}#'s (and of course they all participate in Fiat-Shamir for the random folding coefficient).</p>
 <p>All other things remain in place.</p>
+<details><summary>🤔</summary>Maybe this ^ construction is what should be called moon-moon? It feels like a very diverse bag of tricks at this point, with partial witness at its crux.
+</details>
 <h2>Origami - a look on IVC</h2>
 <p>Anyways, Origami basically works like this: we have two subsets, &quot;before the challenge&quot; and &quot;after the challenge&quot;. We have public inputs which are actually challenges, I will denote them #{{c}}#, but in actual construction #{{c[0] = \beta}}#, #{{c[1] = \gamma}}#.</p>
 <p>The witnesses to the &quot;before&quot; and &quot;after&quot; subsets are called #{{w_0}}# and #{{w_1}}#, and actual witness is the sum of these too.</p>
